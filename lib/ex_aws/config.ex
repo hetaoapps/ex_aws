@@ -14,7 +14,8 @@ defmodule ExAws.Config do
     :debug_requests,
     :region,
     :security_token,
-    :retries
+    :retries,
+    :normalize_path
   ]
 
   @type t :: %{} | Keyword.t()
@@ -41,8 +42,11 @@ defmodule ExAws.Config do
     service_config = Application.get_env(:ex_aws, service, []) |> Map.new()
 
     region =
-      Map.get(overrides, :region) || Map.get(service_config, :region) ||
-        Map.get(common_config, :region) || "us-east-1"
+      (Map.get(overrides, :region)
+        || Map.get(service_config, :region)
+        || Map.get(common_config, :region)
+        || "us-east-1")
+      |> retrieve_runtime_value(%{})
 
     defaults = ExAws.Config.Defaults.get(service, region)
 

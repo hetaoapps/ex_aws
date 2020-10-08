@@ -2,11 +2,25 @@ ExAws
 =====
 [![Hex.pm](https://img.shields.io/hexpm/v/ex_aws.svg)](https://hex.pm/packages/ex_aws)
 [![Build Docs](https://img.shields.io/badge/hexdocs-release-blue.svg)](https://hexdocs.pm/ex_aws/ExAws.html)
-[![Build Status](https://travis-ci.org/CargoSense/ex_aws.svg?branch=master)](https://travis-ci.org/CargoSense/ex_aws)
+[![Build Status](https://travis-ci.org/ex-aws/ex_aws.svg?branch=master)](https://travis-ci.org/ex-aws/ex_aws)
 
 A flexible easy to use set of AWS APIs.
 
 Available Services: https://github.com/ex-aws?q=service&type=&language=
+
+## Deprecation Notice
+
+ExAws is no longer actively maintained. While ExAws got a lot of things right
+as an AWS client, there are some fundamental issues as well that place a large
+burden on maintainers keep things up to date manually.
+
+Efforts to find new ownership that could create and execute a vision to resolve
+those issues were not successful. CargoSense has officially moved off of AWS on
+to GCP as of October 2020, which provides the right moment to call it quits I think.
+
+See https://elixirforum.com/t/maintainer-wanted-exaws/31731 for further discussion.
+
+- Ben Wilson
 
 ## Getting Started
 
@@ -94,6 +108,22 @@ You can set the region used by default for requests.
 config :ex_aws,
   region: "us-west-2",
 ```
+Alternatively, the region can be set in an environment variable:
+
+```elixir
+config :ex_aws,
+  region: {:system, "AWS_REGION"}
+```
+
+### JSON Codec Configuration
+
+The default JSON codec is Poison.  You can choose a different one:
+
+```elixir
+config :ex_aws,
+  json_codec: Jason
+```
+
 
 ## Direct Usage
 
@@ -189,6 +219,12 @@ config :ex_aws, :retries,
 * `base_backoff_in_ms` corresponds to the `base` value described in the blog post
 * `max_backoff_in_ms` corresponds to the `cap` value described in the blog post
 
+## Testing
+
+If you want to run `mix test`, you'll need to have a local `dynamodb` running on port 8000.  
+See [Setting up DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html).
+
+The redirect test will intentionally cause a warning to be issued.
 
 ## License
 

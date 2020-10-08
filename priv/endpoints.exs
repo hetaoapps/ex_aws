@@ -13,6 +13,7 @@
       "regions" => %{
         "ap-northeast-1" => %{"description" => "Asia Pacific (Tokyo)"},
         "ap-northeast-2" => %{"description" => "Asia Pacific (Seoul)"},
+        "ap-east-1" => %{"description" => "Asia Pacific (Hong Kong)"},
         "ap-south-1" => %{"description" => "Asia Pacific (Mumbai)"},
         "ap-southeast-1" => %{"description" => "Asia Pacific (Singapore)"},
         "ap-southeast-2" => %{"description" => "Asia Pacific (Sydney)"},
@@ -24,6 +25,7 @@
         "eu-west-2" => %{"description" => "EU (London)"},
         "eu-west-3" => %{"description" => "EU (Paris)"},
         "eu-north-1" => %{"description" => "EU (Stockholm)"},
+        "eu-south-1" => %{"description" => "EU (Milan)"},
         "sa-east-1" => %{"description" => "South America (Sao Paulo)"},
         "us-east-1" => %{"description" => "US East (N. Virginia)"},
         "us-east-2" => %{"description" => "US East (Ohio)"},
@@ -31,6 +33,17 @@
         "us-west-2" => %{"description" => "US West (Oregon)"}
       },
       "services" => %{
+        "connect" => %{
+          "endpoints" => %{
+            "ap-northeast-1" => %{},
+            "ap-southeast-1" => %{},
+            "ap-southeast-2" => %{},
+            "eu-central-1" => %{},
+            "eu-west-2" => %{},
+            "us-east-1" => %{},
+            "us-west-2" => %{}
+          }
+        },
         "firehose" => %{
           "endpoints" => %{
             "ap-northeast-1" => %{},
@@ -81,6 +94,7 @@
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
             "ap-south-1" => %{},
+            "ap-east-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
             "ca-central-1" => %{},
@@ -100,6 +114,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -173,6 +188,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -194,13 +210,15 @@
             "eu-west-1" => %{},
             "us-east-1" => %{},
             "us-east-2" => %{},
-            "us-west-2" => %{}
+            "us-west-2" => %{},
+            "eu-central-1" => %{}
           }
         },
         "acm" => %{
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -225,6 +243,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -256,6 +275,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -275,6 +295,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -315,6 +336,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -379,6 +401,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -452,6 +475,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -473,6 +497,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -531,6 +556,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -547,6 +573,15 @@
             "us-west-2" => %{}
           }
         },
+        "session.qldb" => %{
+          "endpoints" => %{
+            "ap-northeast-1" => %{},
+            "eu-west-1" => %{},
+            "us-east-1" => %{},
+            "us-east-2" => %{},
+            "us-west-2" => %{}
+          }
+        },
         "shield" => %{
           "defaults" => %{
             "protocols" => ["https"],
@@ -560,6 +595,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -608,6 +644,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -689,6 +726,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -709,6 +747,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -729,6 +768,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -738,6 +778,7 @@
             "eu-west-2" => %{},
             "eu-west-3" => %{},
             "eu-north-1" => %{},
+            "eu-south-1" => %{},
             "sa-east-1" => %{},
             "us-east-1" => %{},
             "us-east-2" => %{},
@@ -817,6 +858,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -847,6 +889,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -902,6 +945,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -967,6 +1011,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1019,6 +1064,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1037,9 +1083,20 @@
         },
         "servicediscovery" => %{
           "endpoints" => %{
+            "ap-northeast-1" => %{},
+            "ap-northeast-2" => %{},
+            "ap-south-1" => %{},
+            "ap-southeast-1" => %{},
+            "ap-southeast-2" => %{},
+            "ca-central-1" => %{},
+            "eu-central-1" => %{},
             "eu-west-1" => %{},
+            "eu-west-2" => %{},
+            "eu-west-3" => %{},
+            "sa-east-1" => %{},
             "us-east-1" => %{},
             "us-east-2" => %{},
+            "us-west-1" => %{},
             "us-west-2" => %{}
           }
         },
@@ -1061,6 +1118,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1147,6 +1205,7 @@
         "rekognition" => %{
           "endpoints" => %{
             "ap-northeast-1" => %{},
+            "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
             "eu-west-1" => %{},
             "us-east-1" => %{},
@@ -1162,6 +1221,7 @@
               "signatureVersions" => ["s3", "s3v4"]
             },
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{
               "hostname" => "s3.ap-southeast-1.amazonaws.com",
@@ -1210,6 +1270,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1257,6 +1318,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1284,6 +1346,7 @@
               "credentialScope" => %{"region" => "ap-northeast-2"},
               "hostname" => "sts.ap-northeast-2.amazonaws.com"
             },
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1326,6 +1389,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1353,6 +1417,19 @@
             "us-east-1" => %{},
             "us-east-2" => %{},
             "us-west-2" => %{}
+          }
+        },
+        "textract" => %{
+          "defaults" => %{"protocols" => ["https"]},
+          "endpoints" => %{
+            "us-east-2" => %{},
+            "us-east-1" => %{},
+            "us-west-1" => %{},
+            "us-west-2" => %{},
+            "ap-southeast-1" => %{},
+            "ap-southeast-2" => %{},
+            "eu-west-1" => %{},
+            "eu-west-2" => %{}
           }
         },
         "waf" => %{
@@ -1393,6 +1470,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1413,6 +1491,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1429,7 +1508,17 @@
             "us-west-2" => %{}
           }
         },
-        "email" => %{"endpoints" => %{"eu-west-1" => %{}, "us-east-1" => %{}, "us-west-2" => %{}}},
+        "email" => %{
+          "endpoints" => %{
+            "ap-south-1" => %{},
+            "ap-southeast-1" => %{},
+            "eu-central-1" => %{},
+            "eu-west-1" => %{},
+            "eu-west-2" => %{},
+            "us-east-1" => %{},
+            "us-west-2" => %{}
+          }
+        },
         "storagegateway" => %{
           "endpoints" => %{
             "ap-northeast-1" => %{},
@@ -1458,6 +1547,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1478,6 +1568,7 @@
           "defaults" => %{"credentialScope" => %{"service" => "cloudhsm"}},
           "endpoints" => %{
             "ap-northeast-1" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1630,6 +1721,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1650,6 +1742,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1685,6 +1778,7 @@
         "route53domains" => %{"endpoints" => %{"us-east-1" => %{}}},
         "states" => %{
           "endpoints" => %{
+            "ap-east-1" => %{},
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
             "ap-southeast-1" => %{},
@@ -1703,6 +1797,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1824,6 +1919,7 @@
           "endpoints" => %{
             "ap-northeast-1" => %{},
             "ap-northeast-2" => %{},
+            "ap-east-1" => %{},
             "ap-south-1" => %{},
             "ap-southeast-1" => %{},
             "ap-southeast-2" => %{},
@@ -1913,6 +2009,15 @@
           },
           "isRegionalized" => false,
           "partitionEndpoint" => "aws-global"
+        },
+        "qldb" => %{
+          "endpoints" => %{
+            "ap-northeast-1" => %{},
+            "eu-west-1" => %{},
+            "us-east-1" => %{},
+            "us-east-2" => %{},
+            "us-west-2" => %{}
+          }
         }
       }
     },
@@ -2150,7 +2255,8 @@
         "ecs" => %{"endpoints" => %{"us-gov-west-1" => %{}}},
         "directconnect" => %{"endpoints" => %{"us-gov-west-1" => %{}}},
         "cloudformation" => %{"endpoints" => %{"us-gov-west-1" => %{}}},
-        "swf" => %{"endpoints" => %{"us-gov-west-1" => %{}}}
+        "swf" => %{"endpoints" => %{"us-gov-west-1" => %{}}},
+        "sagemaker" => %{"endpoints" => %{"us-gov-west-1" => %{}}}
       }
     }
   ],

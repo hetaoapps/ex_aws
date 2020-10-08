@@ -3,8 +3,12 @@ defmodule ExAws.Auth do
 
   alias ExAws.Auth.Credentials
   alias ExAws.Auth.Signatures
+  alias ExAws.Request.Url
 
   @moduledoc false
+
+  @unsignable_headers ["x-amzn-trace-id"]
+  @unsignable_headers_multi_case ["x-amzn-trace-id", "X-Amzn-Trace-Id"]
 
   def validate_config(config) do
     with :ok <- get_key(config, :secret_access_key),
@@ -86,19 +90,18 @@ defmodule ExAws.Auth do
 
       uri = URI.parse(url)
 
+      path = url |> Url.get_path(service) |> Url.uri_encode
       path =
         if uri.query do
-          uri.path <> "?" <> uri.query
+          path <> "?" <> uri.query
         else
-          uri.path
+          path
         end
-
-      path = uri_encode(path)
 
       signature =
         signature(
           http_method,
-          path,
+          url,
           query_to_sign,
           signed_headers,
           body,
@@ -120,14 +123,12 @@ defmodule ExAws.Auth do
 
   defp auth_header(http_method, url, headers, body, service, datetime, config) do
     uri = URI.parse(url)
-    path = uri_encode(uri.path)
-
     query =
       if uri.query,
         do: uri.query |> URI.decode_query() |> Enum.to_list() |> canonical_query_params,
         else: ""
 
-    signature = signature(http_method, path, query, headers, body, service, datetime, config)
+    signature = signature(http_method, url, query, headers, body, service, datetime, config)
 
     [
       "AWS4-HMAC-SHA256 Credential=",
@@ -142,7 +143,8 @@ defmodule ExAws.Auth do
     |> IO.iodata_to_binary()
   end
 
-  defp signature(http_method, path, query, headers, body, service, datetime, config) do
+  defp signature(http_method, url, query, headers, body, service, datetime, config) do
+    path = url |> Url.get_path(service) |> Url.uri_encode()
     request = build_canonical_request(http_method, path, query, headers, body)
     string_to_sign = string_to_sign(request, service, datetime, config)
     Signatures.generate_signature_v4(service, config, datetime, string_to_sign)
@@ -158,10 +160,7 @@ defmodule ExAws.Auth do
       |> Enum.map(fn {k, v} -> "#{k}:#{remove_dup_spaces(to_string(v))}" end)
       |> Enum.join("\n")
 
-    signed_headers_list =
-      headers
-      |> Keyword.keys()
-      |> Enum.join(";")
+    signed_headers_list = signed_headers_value(headers)
 
     payload =
       case body do
@@ -208,6 +207,7 @@ defmodule ExAws.Auth do
   defp signed_headers(headers) do
     headers
     |> Enum.map(fn {k, _} -> String.downcase(k) end)
+    |> Kernel.--(@unsignable_headers)
     |> Enum.sort(&(&1 < &2))
     |> Enum.join(";")
   end
@@ -250,9 +250,10 @@ defmodule ExAws.Auth do
 
   defp canonical_headers(headers) do
     headers
-    |> Enum.map(fn
-      {k, v} when is_binary(v) -> {String.downcase(to_string(k)), String.trim(v)}
-      {k, v} -> {String.downcase(to_string(k)), v}
+    |> Enum.reduce([], fn
+      {k, _v}, acc when k in @unsignable_headers_multi_case -> acc
+      {k, v}, acc when is_binary(v) -> [{String.downcase(to_string(k)), String.trim(v)} | acc]
+      {k, v}, acc -> [{String.downcase(to_string(k)), v} | acc]
     end)
     |> Enum.sort(fn {k1, _}, {k2, _} -> k1 < k2 end)
   end
@@ -268,13 +269,19 @@ defmodule ExAws.Auth do
       {"X-Amz-Credential", Credentials.generate_credential_v4(service, config, datetime)},
       {"X-Amz-Date", amz_date(datetime)},
       {"X-Amz-Expires", expires},
-      {"X-Amz-SignedHeaders", Keyword.keys(signed_headers) |> Enum.join(";")}
+      {"X-Amz-SignedHeaders", signed_headers_value(signed_headers)}
     ] ++
       if config[:security_token] do
         [{"X-Amz-Security-Token", config[:security_token]}]
       else
         []
       end
+  end
+
+  defp signed_headers_value(headers) do
+    headers
+    |> Enum.map(&elem(&1, 0))
+    |> Enum.join(";")
   end
 
   defp service_override(service, config) do
